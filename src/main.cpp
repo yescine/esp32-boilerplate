@@ -15,10 +15,7 @@ void setup() {
 
 void loop() {
   startingLoop();
-  digitalWrite(yellowLed, HIGH);
-  delay(1000);
-  digitalWrite(yellowLed, LOW);
-  delay(1000);
+  blinkLed(yellowLed);
 }
 
 void blinkLed (byte gpio) {
