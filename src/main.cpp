@@ -12,8 +12,8 @@ void connectWiFi (byte gpio);
 
 // !touch only led
 bool WiFiConnected = false;
-const byte yellowLed = GPIO_NUM_32;
-const byte WifiLed = GPIO_NUM_12;
+const byte yellowLed = GPIO_NUM_17;
+const byte WifiLed = GPIO_NUM_16;
 byte loopFlag = 0;
 
 const byte rgbLed[] = {GPIO_NUM_26,GPIO_NUM_25,GPIO_NUM_23};
@@ -30,7 +30,7 @@ void setup() {
 
 void loop() {
   startingLoop();
-  connectWiFi(WifiLed,WiFiConnected);
+  connectWiFi(WifiLed);
   blinkLed(yellowLed);
   rainbow.crossFade(255, 0, 0, 0, 255, 255, 8, 400);
 }
@@ -49,17 +49,17 @@ void startingLoop(){
 
 }
 
-void connectWiFi(byte gpio,bool flag) {
-  if (WiFi.status() == WL_CONNECTED && !flag) {
+void connectWiFi(byte gpio) {
+  if (WiFi.status() == WL_CONNECTED && !WiFiConnected) {
     Serial.println("Wifi Connected");
     digitalWrite(gpio, HIGH);
-    flag = true;
+    WiFiConnected = true;
   }
 
   if (WiFi.status() != WL_CONNECTED) {
-    Serial.println(".");
+    Serial.println("wifi not connected");
     digitalWrite(gpio, !digitalRead(gpio));
     delay(1000);
-    flag = false;
+    WiFiConnected = false;
   }
 }
