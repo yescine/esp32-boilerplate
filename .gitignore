@@ -4,3 +4,4 @@
 .vscode/launch.json
 .vscode/ipch
 config.json
+node_env.h
